@@ -4,10 +4,12 @@
 
 import csv
 import math
+import heapq
 
 # Función para leer el CSV y construir el grafo
 def construir_grafo_desde_csv(ruta_csv):
     grafo = {}
+    info_aeropuertos = {}  # Guardar información de aeropuertos completa
     aeropuertos = {}  # Guardar coordenadas para calcular distancias
     
     with open(ruta_csv, 'r', encoding='utf-8') as archivo:
@@ -15,6 +17,9 @@ def construir_grafo_desde_csv(ruta_csv):
         
         for fila in lector:
             origen = fila['Source Airport Code']
+            nombre = fila['Source Airport Name']
+            ciudad = fila['Source Airport City']
+            pais = fila['Source Airport Country']
             destino = fila['Destination Airport Code']
             lat_origen = float(fila['Source Airport Latitude'])
             lon_origen = float(fila['Source Airport Longitude'])
@@ -27,9 +32,23 @@ def construir_grafo_desde_csv(ruta_csv):
             # Agregar al grafo (no dirigido)
             if origen not in grafo:
                 grafo[origen] = []
+                info_aeropuertos[origen] = {
+                    'latitude': lat_origen,
+                    'longitude': lon_origen,
+                    'name': nombre,
+                    'city': ciudad,
+                    'country': pais
+                }
             if destino not in grafo:
                 grafo[destino] = []
-            
+                info_aeropuertos[destino] = {
+                    'latitude': lat_destino,
+                    'longitude': lon_destino,
+                    'name': fila['Destination Airport Name'],
+                    'city': fila['Destination Airport City'],
+                    'country': fila['Destination Airport Country']
+                }
+
             # Revisar si ya existe la arista para no duplicar
             existe_origen_a_destino = any(v == destino for v, p in grafo[origen])
             existe_destino_a_origen = any(v == origen for v, p in grafo[destino])
@@ -39,7 +58,7 @@ def construir_grafo_desde_csv(ruta_csv):
             if not existe_destino_a_origen:
                 grafo[destino].append((origen, distancia))
     
-    return grafo
+    return grafo, info_aeropuertos
 
 
 # Calcular distancia entre dos puntos geográficos usando la fórmula de Haversine
@@ -141,26 +160,26 @@ def es_bipartito(grafo):
     return True
 
 
-# Función para calcular el peso del MST usando Prim
-def calcular_mst(grafo):
+# Función para calcular el peso del AEM () usando Prim
+def calcular_aem(grafo):
     if not grafo:
         return 0
     
     # Encontrar todas las componentes conexas
     visitados_global = set()
-    peso_total = 0
+    pesos_componentes = []
     
     for nodo_inicio in grafo:
         if nodo_inicio not in visitados_global:
-            # Calcular MST de esta componente usando Prim
-            peso_componente = prim_mst(grafo, nodo_inicio, visitados_global)
-            peso_total += peso_componente
+            # Calcular AEM de esta componente usando Prim
+            peso_componente = prim_aem(grafo, nodo_inicio, visitados_global)
+            pesos_componentes.append(peso_componente)
     
-    return peso_total
+    return pesos_componentes
 
 
-# Función auxiliar Prim para calcular MST de una componente
-def prim_mst(grafo, inicio, visitados_global):
+# Función auxiliar Prim para calcular AEM de una componente
+def prim_aem(grafo, inicio, visitados_global):
     visitados = set()
     visitados.add(inicio)
     visitados_global.add(inicio)
@@ -197,13 +216,60 @@ def prim_mst(grafo, inicio, visitados_global):
     
     return peso_mst
 
+def dijkstra(grafo, inicio):
+    # Inicializamos distancias en infinito y predecesores en None
+    distancias = {nodo: float('inf') for nodo in grafo}
+    predecesores = {nodo: None for nodo in grafo}
+    distancias[inicio] = 0
+    
+    # Cola de prioridad: (distancia, nodo)
+    cola = [(0, inicio)]
+    
+    while cola:
+        distancia_actual, nodo_actual = heapq.heappop(cola)
+        
+        if distancia_actual > distancias[nodo_actual]:
+            continue
+            
+        for vecino, peso in grafo[nodo_actual]:
+            distancia = distancia_actual + peso
+            if distancia < distancias[vecino]:
+                distancias[vecino] = distancia
+                predecesores[vecino] = nodo_actual
+                heapq.heappush(cola, (distancia, vecino))
+                
+    return distancias, predecesores
+
+def reconstruir_camino(predecesores, destino):
+    camino = []
+    nodo = destino
+    
+    while nodo is not None:
+        camino.append(nodo)
+        nodo = predecesores[nodo]
+    
+    camino.reverse()
+    return camino
+
+def Diez_aeropuertos_mas_lejanos(grafo, distancias, info_aeropuertos):
+    # 1. Filtramos los inalcanzables y el origen
+    alcanzables = []
+    for cod, dist in distancias.items():
+        if dist != float('inf') and dist > 0:
+            alcanzables.append((cod, dist))
+
+    # 2. Ordenamos por distancia (la posición [1] de la tupla) de mayor a menor
+    # Usamos reverse=True para que los más largos salgan primero
+    lejanos = sorted(alcanzables, key=lambda x: x[1], reverse=True)[:10]
+
+    return lejanos
 
 # Menú principal
 def menu_principal():
     # Cargar grafo desde CSV
-    ruta_csv = "../flights_final.csv"
+    ruta_csv = "flights_final.csv"
     print("Cargando datos del CSV...")
-    grafo = construir_grafo_desde_csv(ruta_csv)
+    grafo, info_aeropuertos = construir_grafo_desde_csv(ruta_csv)
     print(f"✓ Grafo cargado: {len(grafo)} aeropuertos\n")
     
     print("=" * 40)
@@ -215,6 +281,7 @@ def menu_principal():
         print("1. Ver si el grafo es conexo")
         print("2. Ver si el grafo es bipartito")
         print("3. Calcular peso del MST")
+        print("4. Calcular distancias maximas desde un aeropuerto (Dijkstra)")
         print("0. Salir")
         
         opcion = input("\nElige una opción: ").strip()
@@ -236,8 +303,26 @@ def menu_principal():
                 print("\n✗ El grafo NO es bipartito")
         
         elif opcion == "3":
-            peso = calcular_mst(grafo)
-            print(f"\nPeso total del MST: {peso}")
+            pesos_componentes = calcular_aem(grafo)
+            print(f"\nPesos de las componentes del AEM: {pesos_componentes}")
+
+        elif opcion == "4":
+            aeropuerto_inicio = input("\nIngresa el código del aeropuerto de inicio: ").strip()
+            if aeropuerto_inicio not in grafo:
+                print("✗ Aeropuerto no encontrado en el grafo.")
+                continue
+
+            distancias, predecesores = dijkstra(grafo, aeropuerto_inicio)
+            lejanos = Diez_aeropuertos_mas_lejanos(grafo, distancias, info_aeropuertos)
+
+            # 3. Mostramos los resultados
+            print("\nLos 10 aeropuertos con el camino mínimo más largo:")
+            print("-" * 60)
+            for i, (cod_dest, dist_total) in enumerate(lejanos, 1):
+                info = info_aeropuertos[cod_dest]
+                print(f"{i}. {cod_dest} - {info['name']} ({info['city']}, {info['country']})")
+                print(f"   Distancia del camino: {dist_total:.2f} km")
+            
         
         elif opcion == "0":
             print("\n¡Hasta luego!")
