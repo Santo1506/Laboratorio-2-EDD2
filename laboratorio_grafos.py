@@ -5,6 +5,8 @@
 import csv
 import math
 import heapq
+import folium
+import webbrowser
 
 # Función para leer el CSV y construir el grafo
 def construir_grafo_desde_csv(ruta_csv):
@@ -264,6 +266,40 @@ def Diez_aeropuertos_mas_lejanos(grafo, distancias, info_aeropuertos):
 
     return lejanos
 
+def dibujar_mapa(ruta, info_aeropuertos):
+    
+    # 1. Crear el mapa centrado en el origen
+    origen = ruta[0]
+    lat_org = info_aeropuertos[origen]['latitude']
+    lon_org = info_aeropuertos[origen]['longitude']
+    
+    mapa = folium.Map(location=[lat_org, lon_org], zoom_start=3)
+    
+    # 2. Lista para guardar las coordenadas de la línea
+    puntos_linea = []
+    
+    # 3. Añadir marcadores para cada escala
+    for codigo in ruta:
+        info = info_aeropuertos[codigo]
+        coords = [info['latitude'], info['longitude']]
+        puntos_linea.append(coords)
+        
+        folium.Marker(
+            location=coords,
+            popup=f"{info['name']} ({codigo})\n{info['city']}, {info['country']}",
+            tooltip=codigo,
+            icon=folium.Icon(color='blue', icon='plane')
+        ).add_to(mapa)
+    
+    # 4. Dibujar la línea que une los aeropuertos
+    folium.PolyLine(puntos_linea, color="red", weight=3, opacity=0.8).add_to(mapa)
+    
+    # 5. Guardar y abrir
+    nombre_archivo = "ruta_vuelo.html"
+    mapa.save(nombre_archivo)
+    print(f"\n✓ Mapa generado: {nombre_archivo}")
+    webbrowser.open(nombre_archivo)
+
 # Menú principal
 def menu_principal():
     # Cargar grafo desde CSV
@@ -282,6 +318,7 @@ def menu_principal():
         print("2. Ver si el grafo es bipartito")
         print("3. Calcular peso del MST")
         print("4. Calcular distancias maximas desde un aeropuerto (Dijkstra)")
+        print("5. Encontrar ruta más corta entre dos aeropuertos")
         print("0. Salir")
         
         opcion = input("\nElige una opción: ").strip()
@@ -317,11 +354,30 @@ def menu_principal():
 
             # 3. Mostramos los resultados
             print("\nLos 10 aeropuertos con el camino mínimo más largo:")
-            print("-" * 60)
+            print("-" * 60)     
             for i, (cod_dest, dist_total) in enumerate(lejanos, 1):
                 info = info_aeropuertos[cod_dest]
                 print(f"{i}. {cod_dest} - {info['name']} ({info['city']}, {info['country']})")
                 print(f"   Distancia del camino: {dist_total:.2f} km")
+
+        elif opcion == "5":
+            orig = input("\nCódigo del aeropuerto de Origen: ").strip().upper()
+            dest = input("Código del aeropuerto de Destino: ").strip().upper()
+            
+            if orig in grafo and dest in grafo:
+                distancias, predecesores = dijkstra(grafo, orig)
+                
+                if distancias[dest] == float('inf'):
+                    print(f"✗ No existe una ruta entre {orig} y {dest}")
+                else:
+                    ruta = reconstruir_camino(predecesores, dest)
+                    print(f"\n✓ Ruta encontrada ({distancias[dest]:.2f} km):")
+                    print(" -> ".join(ruta))
+                    
+                    # Llamamos a la función del mapa
+                    dibujar_mapa(ruta, info_aeropuertos)
+            else:
+                print("✗ Uno o ambos códigos de aeropuerto no existen.")
             
         
         elif opcion == "0":
