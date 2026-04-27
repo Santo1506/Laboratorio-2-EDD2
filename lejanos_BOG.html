@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d52a455a6aa10ef79309a3124161e2f3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_d52a455a6aa10ef79309a3124161e2f3" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d52a455a6aa10ef79309a3124161e2f3 = L.map(
+                "map_d52a455a6aa10ef79309a3124161e2f3",
+                {
+                    center: [4.70159, -74.1469],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 2,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_af6455a78630e0d446318cdb261b13de = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_af6455a78630e0d446318cdb261b13de.addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_955bbe2fb11928c74d081e100b6d2304 = L.marker(
+                [4.70159, -74.1469],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_13e5760577d6137bcf5273cefe5c0eca = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9c8fd50ff9d5ffe13af9e95b1d30143b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ffdb1535a6452f7a6b02230620321607 = $(`<div id="html_ffdb1535a6452f7a6b02230620321607" style="width: 100.0%; height: 100.0%;">ORIGEN: El Dorado International Airport</div>`)[0];
+                popup_9c8fd50ff9d5ffe13af9e95b1d30143b.setContent(html_ffdb1535a6452f7a6b02230620321607);
+            
+        
+
+        marker_955bbe2fb11928c74d081e100b6d2304.bindPopup(popup_9c8fd50ff9d5ffe13af9e95b1d30143b)
+        ;
+
+        
+    
+    
+                marker_955bbe2fb11928c74d081e100b6d2304.setIcon(icon_13e5760577d6137bcf5273cefe5c0eca);
+            
+    
+            var marker_462539e8f2d36d31d9c722807280144d = L.marker(
+                [-8.520290375, 140.4179993],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_65b77994092ff9eabc132c0498520ec8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9cc2708a80cd00d58b605192c06ec20e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a5991974fd38e115ea678ac98a3f6cad = $(`<div id="html_a5991974fd38e115ea678ac98a3f6cad" style="width: 100.0%; height: 100.0%;">Mopah Airport (MKQ) Distancia: 22748.09 km</div>`)[0];
+                popup_9cc2708a80cd00d58b605192c06ec20e.setContent(html_a5991974fd38e115ea678ac98a3f6cad);
+            
+        
+
+        marker_462539e8f2d36d31d9c722807280144d.bindPopup(popup_9cc2708a80cd00d58b605192c06ec20e)
+        ;
+
+        
+    
+    
+                marker_462539e8f2d36d31d9c722807280144d.setIcon(icon_65b77994092ff9eabc132c0498520ec8);
+            
+    
+            var poly_line_29b7692e8eac435bbaffe5f5b1aa2a02 = L.polyline(
+                [[4.70159, -74.1469], [-8.520290375, 140.4179993]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_fbe88455350e5e33e419950ae1ae3e9e = L.marker(
+                [-12.18830013, 96.83390045],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_183d187ff6a594da38571ca8dcf549de = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f6c8efcd8788674656d02690c17e0532 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_940d7e1eae2712f811dbc490e2953b53 = $(`<div id="html_940d7e1eae2712f811dbc490e2953b53" style="width: 100.0%; height: 100.0%;">Cocos (Keeling) Islands Airport (CCK) Distancia: 22465.40 km</div>`)[0];
+                popup_f6c8efcd8788674656d02690c17e0532.setContent(html_940d7e1eae2712f811dbc490e2953b53);
+            
+        
+
+        marker_fbe88455350e5e33e419950ae1ae3e9e.bindPopup(popup_f6c8efcd8788674656d02690c17e0532)
+        ;
+
+        
+    
+    
+                marker_fbe88455350e5e33e419950ae1ae3e9e.setIcon(icon_183d187ff6a594da38571ca8dcf549de);
+            
+    
+            var poly_line_d52c62ba86614c76401bf8791cc809a7 = L.polyline(
+                [[4.70159, -74.1469], [-12.18830013, 96.83390045]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_d5d87a3e90a82d7e139865f21297b31d = L.marker(
+                [-4.9071, 140.6277],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_f863bfd14a9e771695bec6c3783cedd6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ee25d2295404d142fc1f71734b6996de = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8254f35d26ca4ebdf6c8f3463d0cb0c1 = $(`<div id="html_8254f35d26ca4ebdf6c8f3463d0cb0c1" style="width: 100.0%; height: 100.0%;">Oksibil Airport (OKL) Distancia: 22346.52 km</div>`)[0];
+                popup_ee25d2295404d142fc1f71734b6996de.setContent(html_8254f35d26ca4ebdf6c8f3463d0cb0c1);
+            
+        
+
+        marker_d5d87a3e90a82d7e139865f21297b31d.bindPopup(popup_ee25d2295404d142fc1f71734b6996de)
+        ;
+
+        
+    
+    
+                marker_d5d87a3e90a82d7e139865f21297b31d.setIcon(icon_f863bfd14a9e771695bec6c3783cedd6);
+            
+    
+            var poly_line_ab8f251a9fc14f0469b585795f4ffb0b = L.polyline(
+                [[4.70159, -74.1469], [-4.9071, 140.6277]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_6a4d0320a94e85426932ed6424d29beb = L.marker(
+                [-4.10251, 138.957001],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_494bd9a8deb23012d1d9c086dfe6eb31 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_09162268540b2f70dda77b92ca4374f8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_64ebe13840e0f3c8594a071228df11e1 = $(`<div id="html_64ebe13840e0f3c8594a071228df11e1" style="width: 100.0%; height: 100.0%;">Wamena Airport (WMX) Distancia: 22329.46 km</div>`)[0];
+                popup_09162268540b2f70dda77b92ca4374f8.setContent(html_64ebe13840e0f3c8594a071228df11e1);
+            
+        
+
+        marker_6a4d0320a94e85426932ed6424d29beb.bindPopup(popup_09162268540b2f70dda77b92ca4374f8)
+        ;
+
+        
+    
+    
+                marker_6a4d0320a94e85426932ed6424d29beb.setIcon(icon_494bd9a8deb23012d1d9c086dfe6eb31);
+            
+    
+            var poly_line_1d029faf6e076e372449b9d9816f071a = L.polyline(
+                [[4.70159, -74.1469], [-4.10251, 138.957001]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_7e573e505f0be4e2518780efc480da5d = L.marker(
+                [-2.576950073, 140.5160065],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_ae93be069243d44e0d27652d20dcc901 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0716c4d95db51f610553144c0eba18a7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_36957d7483aa0cf2177bb6821f6641ac = $(`<div id="html_36957d7483aa0cf2177bb6821f6641ac" style="width: 100.0%; height: 100.0%;">Sentani International Airport (DJJ) Distancia: 22087.13 km</div>`)[0];
+                popup_0716c4d95db51f610553144c0eba18a7.setContent(html_36957d7483aa0cf2177bb6821f6641ac);
+            
+        
+
+        marker_7e573e505f0be4e2518780efc480da5d.bindPopup(popup_0716c4d95db51f610553144c0eba18a7)
+        ;
+
+        
+    
+    
+                marker_7e573e505f0be4e2518780efc480da5d.setIcon(icon_ae93be069243d44e0d27652d20dcc901);
+            
+    
+            var poly_line_e52c1b2f4b5c01b8e2f67826b24f7958 = L.polyline(
+                [[4.70159, -74.1469], [-2.576950073, 140.5160065]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_821934fba05d41491b7f36d82b979210 = L.marker(
+                [-4.528279781, 136.8869934],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_8f94e74320d71682406e84e346054d2b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8dd5eb7c60e002b1c0ad3ea258cb4b7a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bd4a12bdf1bc72062e92f1f772a5ce4a = $(`<div id="html_bd4a12bdf1bc72062e92f1f772a5ce4a" style="width: 100.0%; height: 100.0%;">Moses Kilangin Airport (TIM) Distancia: 21696.73 km</div>`)[0];
+                popup_8dd5eb7c60e002b1c0ad3ea258cb4b7a.setContent(html_bd4a12bdf1bc72062e92f1f772a5ce4a);
+            
+        
+
+        marker_821934fba05d41491b7f36d82b979210.bindPopup(popup_8dd5eb7c60e002b1c0ad3ea258cb4b7a)
+        ;
+
+        
+    
+    
+                marker_821934fba05d41491b7f36d82b979210.setIcon(icon_8f94e74320d71682406e84e346054d2b);
+            
+    
+            var poly_line_e911c9acee8712e61ba9867078f9e47e = L.polyline(
+                [[4.70159, -74.1469], [-4.528279781, 136.8869934]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_a2fb2819b6543b1cc2bd54ced3eb67f2 = L.marker(
+                [-1.190019965, 136.1080017],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_3ee5fb7f4cf4f27618475ba6feb34a41 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7786ab26685f1776d8ac57772ac0ef69 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c50478432e42e1d97dca786ee355ca6f = $(`<div id="html_c50478432e42e1d97dca786ee355ca6f" style="width: 100.0%; height: 100.0%;">Frans Kaisiepo Airport (BIK) Distancia: 21662.64 km</div>`)[0];
+                popup_7786ab26685f1776d8ac57772ac0ef69.setContent(html_c50478432e42e1d97dca786ee355ca6f);
+            
+        
+
+        marker_a2fb2819b6543b1cc2bd54ced3eb67f2.bindPopup(popup_7786ab26685f1776d8ac57772ac0ef69)
+        ;
+
+        
+    
+    
+                marker_a2fb2819b6543b1cc2bd54ced3eb67f2.setIcon(icon_3ee5fb7f4cf4f27618475ba6feb34a41);
+            
+    
+            var poly_line_6e7b38fa9a9cd12fa456fb769cfc177c = L.polyline(
+                [[4.70159, -74.1469], [-1.190019965, 136.1080017]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_433def0d0eebfb214bb20ed37e19b227 = L.marker(
+                [-3.36818, 135.496002],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_8886389fb08062cd88b6a5aece7fb2f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aa1bfae20328e6d3ed9b469116b5c90d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1a3f66a70456ec7b2f2326c198b3cdd5 = $(`<div id="html_1a3f66a70456ec7b2f2326c198b3cdd5" style="width: 100.0%; height: 100.0%;">Nabire Airport (NBX) Distancia: 21556.30 km</div>`)[0];
+                popup_aa1bfae20328e6d3ed9b469116b5c90d.setContent(html_1a3f66a70456ec7b2f2326c198b3cdd5);
+            
+        
+
+        marker_433def0d0eebfb214bb20ed37e19b227.bindPopup(popup_aa1bfae20328e6d3ed9b469116b5c90d)
+        ;
+
+        
+    
+    
+                marker_433def0d0eebfb214bb20ed37e19b227.setIcon(icon_8886389fb08062cd88b6a5aece7fb2f0);
+            
+    
+            var poly_line_049d62aa51a2f49fd225dbde5201e5b5 = L.polyline(
+                [[4.70159, -74.1469], [-3.36818, 135.496002]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_1ce690e4e95d146aa9ada57a329bac6b = L.marker(
+                [-10.45059967, 105.6900024],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_c52309d6247f2bc3c7bc1094ed103422 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7f598b6c15ca210bacaed5bca4aae42a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_57962a65cf4ef0b25c137f7b2e4effa2 = $(`<div id="html_57962a65cf4ef0b25c137f7b2e4effa2" style="width: 100.0%; height: 100.0%;">Christmas Island Airport (XCH) Distancia: 21480.74 km</div>`)[0];
+                popup_7f598b6c15ca210bacaed5bca4aae42a.setContent(html_57962a65cf4ef0b25c137f7b2e4effa2);
+            
+        
+
+        marker_1ce690e4e95d146aa9ada57a329bac6b.bindPopup(popup_7f598b6c15ca210bacaed5bca4aae42a)
+        ;
+
+        
+    
+    
+                marker_1ce690e4e95d146aa9ada57a329bac6b.setIcon(icon_c52309d6247f2bc3c7bc1094ed103422);
+            
+    
+            var poly_line_d1b5cfbfbbb6c81be9fe0bf1413cea61 = L.polyline(
+                [[4.70159, -74.1469], [-10.45059967, 105.6900024]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var marker_fe5900d4a9662c326bca879c0b72d793 = L.marker(
+                [-5.772220135, 134.2120056],
+                {
+}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+    
+            var icon_c9db64b678dc52039d180cdaffd30045 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d6fd6377630f84eb27c92a24ae64319b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2955a8169eecaff3df50386878a30314 = $(`<div id="html_2955a8169eecaff3df50386878a30314" style="width: 100.0%; height: 100.0%;">Rar Gwamar Airport (DOB) Distancia: 21456.00 km</div>`)[0];
+                popup_d6fd6377630f84eb27c92a24ae64319b.setContent(html_2955a8169eecaff3df50386878a30314);
+            
+        
+
+        marker_fe5900d4a9662c326bca879c0b72d793.bindPopup(popup_d6fd6377630f84eb27c92a24ae64319b)
+        ;
+
+        
+    
+    
+                marker_fe5900d4a9662c326bca879c0b72d793.setIcon(icon_c9db64b678dc52039d180cdaffd30045);
+            
+    
+            var poly_line_f105bfb7b84838e928e43b614c4b865a = L.polyline(
+                [[4.70159, -74.1469], [-5.772220135, 134.2120056]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.4, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d52a455a6aa10ef79309a3124161e2f3);
+        
+</script>
+</html>

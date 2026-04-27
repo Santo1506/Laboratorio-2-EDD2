@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_92aa9eb06bd61d879edd8844f3a29c20 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_92aa9eb06bd61d879edd8844f3a29c20" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_92aa9eb06bd61d879edd8844f3a29c20 = L.map(
+                "map_92aa9eb06bd61d879edd8844f3a29c20",
+                {
+                    center: [4.70159, -74.1469],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 2,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_52f204e8ec122e37acf7813bac16970f = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_52f204e8ec122e37acf7813bac16970f.addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var marker_3f58ea225481e8fb69efccf77aa6713e = L.marker(
+                [4.70159, -74.1469],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_bf9c8980841465bd6432b6b41cce76c0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f3f46171bb52ccacd116df19bcf409cc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2f0d6aac320babc84f73488522c6e2b4 = $(`<div id="html_2f0d6aac320babc84f73488522c6e2b4" style="width: 100.0%; height: 100.0%;">ORIGEN: El Dorado International Airport (BOG)</div>`)[0];
+                popup_f3f46171bb52ccacd116df19bcf409cc.setContent(html_2f0d6aac320babc84f73488522c6e2b4);
+            
+        
+
+        marker_3f58ea225481e8fb69efccf77aa6713e.bindPopup(popup_f3f46171bb52ccacd116df19bcf409cc)
+        ;
+
+        
+    
+    
+                marker_3f58ea225481e8fb69efccf77aa6713e.setIcon(icon_bf9c8980841465bd6432b6b41cce76c0);
+            
+    
+            var poly_line_2ef71e796aa26361c387d8749a998094 = L.polyline(
+                [[4.70159, -74.1469], [29.9843998, -95.34140015], [35.76470184, 140.3860016], [5.937210083, 116.0510025], [4.320159912, 118.1279984], [3.326667, 117.569444], [-1.268270016, 116.8939972], [1.54926002, 124.9260025], [-0.894, 131.287], [-0.891833007, 134.048996], [-2.576950073, 140.5160065], [-8.520290375, 140.4179993]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_70f0fceed3b8be5f84c88ab2da7e6e54 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_300516c7859988406b5183bcc706b5ea = $(`<div id="html_300516c7859988406b5183bcc706b5ea" style="width: 100.0%; height: 100.0%;">Ruta #1 a MKQ (22748.09 km)</div>`)[0];
+                popup_70f0fceed3b8be5f84c88ab2da7e6e54.setContent(html_300516c7859988406b5183bcc706b5ea);
+            
+        
+
+        poly_line_2ef71e796aa26361c387d8749a998094.bindPopup(popup_70f0fceed3b8be5f84c88ab2da7e6e54)
+        ;
+
+        
+    
+    
+            var marker_b57f555a917f903d2932ea4e0b78998f = L.marker(
+                [-8.520290375, 140.4179993],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_a5cad1bd279195f38a4608db0918215a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b1dbeaa260adb347657d671a88182ec6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1b4ae6a99383b22c05aca64fabc02bcd = $(`<div id="html_1b4ae6a99383b22c05aca64fabc02bcd" style="width: 100.0%; height: 100.0%;">Destino #1: Mopah Airport Distancia: 22748.09 km</div>`)[0];
+                popup_b1dbeaa260adb347657d671a88182ec6.setContent(html_1b4ae6a99383b22c05aca64fabc02bcd);
+            
+        
+
+        marker_b57f555a917f903d2932ea4e0b78998f.bindPopup(popup_b1dbeaa260adb347657d671a88182ec6)
+        ;
+
+        
+    
+    
+                marker_b57f555a917f903d2932ea4e0b78998f.setIcon(icon_a5cad1bd279195f38a4608db0918215a);
+            
+    
+            var poly_line_138c3d68b1318aeb232309a3f060f755 = L.polyline(
+                [[4.70159, -74.1469], [-33.39300156, -70.78579712], [-33.94609833, 151.177002], [-31.94029999, 115.9670029], [-10.45059967, 105.6900024], [-12.18830013, 96.83390045]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_03dee2a62a014cc2b20d65e4990b9922 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8520ff22a5d6ff02569568de1aea32ea = $(`<div id="html_8520ff22a5d6ff02569568de1aea32ea" style="width: 100.0%; height: 100.0%;">Ruta #2 a CCK (22465.40 km)</div>`)[0];
+                popup_03dee2a62a014cc2b20d65e4990b9922.setContent(html_8520ff22a5d6ff02569568de1aea32ea);
+            
+        
+
+        poly_line_138c3d68b1318aeb232309a3f060f755.bindPopup(popup_03dee2a62a014cc2b20d65e4990b9922)
+        ;
+
+        
+    
+    
+            var marker_fd8e5badd18599a325d997c76b2d3a1a = L.marker(
+                [-12.18830013, 96.83390045],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_7590e368666d42da52cc1b7be73d9114 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b7f3a0a204917b2b2ce81d45a7616cb6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f0e37a42af4faec984fdb0b2960320b9 = $(`<div id="html_f0e37a42af4faec984fdb0b2960320b9" style="width: 100.0%; height: 100.0%;">Destino #2: Cocos (Keeling) Islands Airport Distancia: 22465.40 km</div>`)[0];
+                popup_b7f3a0a204917b2b2ce81d45a7616cb6.setContent(html_f0e37a42af4faec984fdb0b2960320b9);
+            
+        
+
+        marker_fd8e5badd18599a325d997c76b2d3a1a.bindPopup(popup_b7f3a0a204917b2b2ce81d45a7616cb6)
+        ;
+
+        
+    
+    
+                marker_fd8e5badd18599a325d997c76b2d3a1a.setIcon(icon_7590e368666d42da52cc1b7be73d9114);
+            
+    
+            var poly_line_f6aac4ea6e6e1a93bb1e1cde1e4fcedc = L.polyline(
+                [[4.70159, -74.1469], [29.9843998, -95.34140015], [35.76470184, 140.3860016], [5.937210083, 116.0510025], [4.320159912, 118.1279984], [3.326667, 117.569444], [-1.268270016, 116.8939972], [1.54926002, 124.9260025], [-0.894, 131.287], [-0.891833007, 134.048996], [-2.576950073, 140.5160065], [-4.9071, 140.6277]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_56244fd448e10af79880af21568800af = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6e755944834c1eef939b6d680a349259 = $(`<div id="html_6e755944834c1eef939b6d680a349259" style="width: 100.0%; height: 100.0%;">Ruta #3 a OKL (22346.52 km)</div>`)[0];
+                popup_56244fd448e10af79880af21568800af.setContent(html_6e755944834c1eef939b6d680a349259);
+            
+        
+
+        poly_line_f6aac4ea6e6e1a93bb1e1cde1e4fcedc.bindPopup(popup_56244fd448e10af79880af21568800af)
+        ;
+
+        
+    
+    
+            var marker_842fd42d7d0787640392883eae7fe7c6 = L.marker(
+                [-4.9071, 140.6277],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_e130e1fb9a53dc585bd37e8b0958da96 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_84cff0bdc8ee310b391efb0611331078 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5a5cbf536b95a829f7ca306e883dcdab = $(`<div id="html_5a5cbf536b95a829f7ca306e883dcdab" style="width: 100.0%; height: 100.0%;">Destino #3: Oksibil Airport Distancia: 22346.52 km</div>`)[0];
+                popup_84cff0bdc8ee310b391efb0611331078.setContent(html_5a5cbf536b95a829f7ca306e883dcdab);
+            
+        
+
+        marker_842fd42d7d0787640392883eae7fe7c6.bindPopup(popup_84cff0bdc8ee310b391efb0611331078)
+        ;
+
+        
+    
+    
+                marker_842fd42d7d0787640392883eae7fe7c6.setIcon(icon_e130e1fb9a53dc585bd37e8b0958da96);
+            
+    
+            var poly_line_19b97ac6e3418309fabb4c5166b7b9d9 = L.polyline(
+                [[4.70159, -74.1469], [29.9843998, -95.34140015], [35.76470184, 140.3860016], [5.937210083, 116.0510025], [4.320159912, 118.1279984], [3.326667, 117.569444], [-1.268270016, 116.8939972], [1.54926002, 124.9260025], [-0.894, 131.287], [-0.891833007, 134.048996], [-2.576950073, 140.5160065], [-4.10251, 138.957001]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_8b4cf71d9b78901abda512950beb5ae0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bc504f1da4b783fb96c45a866fcdac3b = $(`<div id="html_bc504f1da4b783fb96c45a866fcdac3b" style="width: 100.0%; height: 100.0%;">Ruta #4 a WMX (22329.46 km)</div>`)[0];
+                popup_8b4cf71d9b78901abda512950beb5ae0.setContent(html_bc504f1da4b783fb96c45a866fcdac3b);
+            
+        
+
+        poly_line_19b97ac6e3418309fabb4c5166b7b9d9.bindPopup(popup_8b4cf71d9b78901abda512950beb5ae0)
+        ;
+
+        
+    
+    
+            var marker_c10895b60a0b06d30b5d6f7b096d3d9e = L.marker(
+                [-4.10251, 138.957001],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_40a285bcea81d70601915f5e62d3a7f9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a781d748ebc84a927c3ab363e5bf678a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0927693ca69c5950d2e5e4f36da2fa49 = $(`<div id="html_0927693ca69c5950d2e5e4f36da2fa49" style="width: 100.0%; height: 100.0%;">Destino #4: Wamena Airport Distancia: 22329.46 km</div>`)[0];
+                popup_a781d748ebc84a927c3ab363e5bf678a.setContent(html_0927693ca69c5950d2e5e4f36da2fa49);
+            
+        
+
+        marker_c10895b60a0b06d30b5d6f7b096d3d9e.bindPopup(popup_a781d748ebc84a927c3ab363e5bf678a)
+        ;
+
+        
+    
+    
+                marker_c10895b60a0b06d30b5d6f7b096d3d9e.setIcon(icon_40a285bcea81d70601915f5e62d3a7f9);
+            
+    
+            var poly_line_d14fbb59a0d032b246153021ea5df569 = L.polyline(
+                [[4.70159, -74.1469], [29.9843998, -95.34140015], [35.76470184, 140.3860016], [5.937210083, 116.0510025], [4.320159912, 118.1279984], [3.326667, 117.569444], [-1.268270016, 116.8939972], [1.54926002, 124.9260025], [-0.894, 131.287], [-0.891833007, 134.048996], [-2.576950073, 140.5160065]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_7b88681ba39e0ad27730e135811a7382 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1e849922ec7b409b34091b402fbe7df3 = $(`<div id="html_1e849922ec7b409b34091b402fbe7df3" style="width: 100.0%; height: 100.0%;">Ruta #5 a DJJ (22087.13 km)</div>`)[0];
+                popup_7b88681ba39e0ad27730e135811a7382.setContent(html_1e849922ec7b409b34091b402fbe7df3);
+            
+        
+
+        poly_line_d14fbb59a0d032b246153021ea5df569.bindPopup(popup_7b88681ba39e0ad27730e135811a7382)
+        ;
+
+        
+    
+    
+            var marker_f25eb2f79c2a1e0202b63b44dbe895cc = L.marker(
+                [-2.576950073, 140.5160065],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_82afef2dd662bd02ca97d45f5d4ae4ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_65e68391790a361024e82c7ead891118 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_db8373507afe74ef12dae505743a7d15 = $(`<div id="html_db8373507afe74ef12dae505743a7d15" style="width: 100.0%; height: 100.0%;">Destino #5: Sentani International Airport Distancia: 22087.13 km</div>`)[0];
+                popup_65e68391790a361024e82c7ead891118.setContent(html_db8373507afe74ef12dae505743a7d15);
+            
+        
+
+        marker_f25eb2f79c2a1e0202b63b44dbe895cc.bindPopup(popup_65e68391790a361024e82c7ead891118)
+        ;
+
+        
+    
+    
+                marker_f25eb2f79c2a1e0202b63b44dbe895cc.setIcon(icon_82afef2dd662bd02ca97d45f5d4ae4ef);
+            
+    
+            var poly_line_9072fd81e00a12ec8ea8bbde35356028 = L.polyline(
+                [[4.70159, -74.1469], [29.9843998, -95.34140015], [35.76470184, 140.3860016], [5.937210083, 116.0510025], [4.320159912, 118.1279984], [3.326667, 117.569444], [-5.061629772, 119.5540009], [-4.528279781, 136.8869934]],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "darkred", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_d70cbf578ad68aa2de08281d98dfffef = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_447489c5d183f0e7f6e74a09b75b0c3e = $(`<div id="html_447489c5d183f0e7f6e74a09b75b0c3e" style="width: 100.0%; height: 100.0%;">Ruta #6 a TIM (21696.73 km)</div>`)[0];
+                popup_d70cbf578ad68aa2de08281d98dfffef.setContent(html_447489c5d183f0e7f6e74a09b75b0c3e);
+            
+        
+
+        poly_line_9072fd81e00a12ec8ea8bbde35356028.bindPopup(popup_d70cbf578ad68aa2de08281d98dfffef)
+        ;
+
+        
+    
+    
+            var marker_2c386a167d9fbbcc21a7ad02784305e2 = L.marker(
+                [-4.528279781, 136.8869934],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_a42eea255500ef708acf2039504036a4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bca0c9fad67757cf69167c719917cbd4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_52d9f8227657aa86923238b7b4e0918a = $(`<div id="html_52d9f8227657aa86923238b7b4e0918a" style="width: 100.0%; height: 100.0%;">Destino #6: Moses Kilangin Airport Distancia: 21696.73 km</div>`)[0];
+                popup_bca0c9fad67757cf69167c719917cbd4.setContent(html_52d9f8227657aa86923238b7b4e0918a);
+            
+        
+
+        marker_2c386a167d9fbbcc21a7ad02784305e2.bindPopup(popup_bca0c9fad67757cf69167c719917cbd4)
+        ;
+
+        
+    
+    
+                marker_2c386a167d9fbbcc21a7ad02784305e2.setIcon(icon_a42eea255500ef708acf2039504036a4);
+            
+    
+            var poly_line_1b142918cbefa15af6e51fe5b4d3edaa = L.polyline(
+                [[4.70159, -74.1469], [29.9843998, -95.34140015], [35.76470184, 140.3860016], [5.937210083, 116.0510025], [4.320159912, 118.1279984], [3.326667, 117.569444], [-5.061629772, 119.5540009], [-1.190019965, 136.1080017]],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "cadetblue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_89fb83d765b363e69fd87f634ad5317a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_590404606ae16a98439c0f80ef89754e = $(`<div id="html_590404606ae16a98439c0f80ef89754e" style="width: 100.0%; height: 100.0%;">Ruta #7 a BIK (21662.64 km)</div>`)[0];
+                popup_89fb83d765b363e69fd87f634ad5317a.setContent(html_590404606ae16a98439c0f80ef89754e);
+            
+        
+
+        poly_line_1b142918cbefa15af6e51fe5b4d3edaa.bindPopup(popup_89fb83d765b363e69fd87f634ad5317a)
+        ;
+
+        
+    
+    
+            var marker_40a72d9825f744e3c6ca3ffffa782117 = L.marker(
+                [-1.190019965, 136.1080017],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_bbe3dbd7aed7982b242d1397ff2a3312 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "cadetblue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_65fabc40779031c77be729b146e48fba = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fa4f5a58c532f57aca044e5aaad47aa2 = $(`<div id="html_fa4f5a58c532f57aca044e5aaad47aa2" style="width: 100.0%; height: 100.0%;">Destino #7: Frans Kaisiepo Airport Distancia: 21662.64 km</div>`)[0];
+                popup_65fabc40779031c77be729b146e48fba.setContent(html_fa4f5a58c532f57aca044e5aaad47aa2);
+            
+        
+
+        marker_40a72d9825f744e3c6ca3ffffa782117.bindPopup(popup_65fabc40779031c77be729b146e48fba)
+        ;
+
+        
+    
+    
+                marker_40a72d9825f744e3c6ca3ffffa782117.setIcon(icon_bbe3dbd7aed7982b242d1397ff2a3312);
+            
+    
+            var poly_line_f0a7882b9b45181fe6b6746d88a9eddb = L.polyline(
+                [[4.70159, -74.1469], [29.9843998, -95.34140015], [35.76470184, 140.3860016], [5.937210083, 116.0510025], [4.320159912, 118.1279984], [3.326667, 117.569444], [-5.061629772, 119.5540009], [-3.710259914, 128.0890045], [-3.36818, 135.496002]],
+                {"bubblingMouseEvents": true, "color": "darkgreen", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "darkgreen", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_57ad443cea1c198460ce7373c2ea3041 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cc19342ce58ee525511bac061ad5d5f9 = $(`<div id="html_cc19342ce58ee525511bac061ad5d5f9" style="width: 100.0%; height: 100.0%;">Ruta #8 a NBX (21556.30 km)</div>`)[0];
+                popup_57ad443cea1c198460ce7373c2ea3041.setContent(html_cc19342ce58ee525511bac061ad5d5f9);
+            
+        
+
+        poly_line_f0a7882b9b45181fe6b6746d88a9eddb.bindPopup(popup_57ad443cea1c198460ce7373c2ea3041)
+        ;
+
+        
+    
+    
+            var marker_657b1dd40faed5a67ac7eeafdd92b927 = L.marker(
+                [-3.36818, 135.496002],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_a3461350c704de7ca174711f87d4b213 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dd82b40338245432b98bda208143ddb0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b2ae2b2204b5d6c555f15606864fcea0 = $(`<div id="html_b2ae2b2204b5d6c555f15606864fcea0" style="width: 100.0%; height: 100.0%;">Destino #8: Nabire Airport Distancia: 21556.30 km</div>`)[0];
+                popup_dd82b40338245432b98bda208143ddb0.setContent(html_b2ae2b2204b5d6c555f15606864fcea0);
+            
+        
+
+        marker_657b1dd40faed5a67ac7eeafdd92b927.bindPopup(popup_dd82b40338245432b98bda208143ddb0)
+        ;
+
+        
+    
+    
+                marker_657b1dd40faed5a67ac7eeafdd92b927.setIcon(icon_a3461350c704de7ca174711f87d4b213);
+            
+    
+            var poly_line_ece8c325330d14ecb4ebef5b8f04f4d5 = L.polyline(
+                [[4.70159, -74.1469], [-33.39300156, -70.78579712], [-33.94609833, 151.177002], [-31.94029999, 115.9670029], [-10.45059967, 105.6900024]],
+                {"bubblingMouseEvents": true, "color": "darkpurple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "darkpurple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_123e7401bcbb418147c0e4b3c5b31eca = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_10841417b88a3f8c2a53b2f7a70c7afe = $(`<div id="html_10841417b88a3f8c2a53b2f7a70c7afe" style="width: 100.0%; height: 100.0%;">Ruta #9 a XCH (21480.74 km)</div>`)[0];
+                popup_123e7401bcbb418147c0e4b3c5b31eca.setContent(html_10841417b88a3f8c2a53b2f7a70c7afe);
+            
+        
+
+        poly_line_ece8c325330d14ecb4ebef5b8f04f4d5.bindPopup(popup_123e7401bcbb418147c0e4b3c5b31eca)
+        ;
+
+        
+    
+    
+            var marker_647c54de7c6b6c8e32aeac4f7790ce3c = L.marker(
+                [-10.45059967, 105.6900024],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_f3f35fbd3eeb4376218bdc2e062934f6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkpurple",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0095b3882589169037dd747273c6f94d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_87ff0356216051aadf2faa7a6d8f7129 = $(`<div id="html_87ff0356216051aadf2faa7a6d8f7129" style="width: 100.0%; height: 100.0%;">Destino #9: Christmas Island Airport Distancia: 21480.74 km</div>`)[0];
+                popup_0095b3882589169037dd747273c6f94d.setContent(html_87ff0356216051aadf2faa7a6d8f7129);
+            
+        
+
+        marker_647c54de7c6b6c8e32aeac4f7790ce3c.bindPopup(popup_0095b3882589169037dd747273c6f94d)
+        ;
+
+        
+    
+    
+                marker_647c54de7c6b6c8e32aeac4f7790ce3c.setIcon(icon_f3f35fbd3eeb4376218bdc2e062934f6);
+            
+    
+            var poly_line_e0869cb63b66f9d65e6f944d40d2a176 = L.polyline(
+                [[4.70159, -74.1469], [29.9843998, -95.34140015], [35.76470184, 140.3860016], [5.937210083, 116.0510025], [4.320159912, 118.1279984], [3.326667, 117.569444], [-5.061629772, 119.5540009], [-3.710259914, 128.0890045], [-5.66162014, 132.7310028], [-5.772220135, 134.2120056]],
+                {"bubblingMouseEvents": true, "color": "pink", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "pink", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+        var popup_6c8f49f1cd65e6de8acc0ce6b952dec7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0d8a9b4e3615e1903a4f88d3e6ae47b2 = $(`<div id="html_0d8a9b4e3615e1903a4f88d3e6ae47b2" style="width: 100.0%; height: 100.0%;">Ruta #10 a DOB (21456.00 km)</div>`)[0];
+                popup_6c8f49f1cd65e6de8acc0ce6b952dec7.setContent(html_0d8a9b4e3615e1903a4f88d3e6ae47b2);
+            
+        
+
+        poly_line_e0869cb63b66f9d65e6f944d40d2a176.bindPopup(popup_6c8f49f1cd65e6de8acc0ce6b952dec7)
+        ;
+
+        
+    
+    
+            var marker_5bdee4ff23533aa5a52c8e5d3318f4e4 = L.marker(
+                [-5.772220135, 134.2120056],
+                {
+}
+            ).addTo(map_92aa9eb06bd61d879edd8844f3a29c20);
+        
+    
+            var icon_e95d418e1aca9d1a0147e696b9968798 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8452f5dbd69346e72d9f97bca3afbcef = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dd48affb79dc898d2a59d92e04579ec6 = $(`<div id="html_dd48affb79dc898d2a59d92e04579ec6" style="width: 100.0%; height: 100.0%;">Destino #10: Rar Gwamar Airport Distancia: 21456.00 km</div>`)[0];
+                popup_8452f5dbd69346e72d9f97bca3afbcef.setContent(html_dd48affb79dc898d2a59d92e04579ec6);
+            
+        
+
+        marker_5bdee4ff23533aa5a52c8e5d3318f4e4.bindPopup(popup_8452f5dbd69346e72d9f97bca3afbcef)
+        ;
+
+        
+    
+    
+                marker_5bdee4ff23533aa5a52c8e5d3318f4e4.setIcon(icon_e95d418e1aca9d1a0147e696b9968798);
+            
+</script>
+</html>

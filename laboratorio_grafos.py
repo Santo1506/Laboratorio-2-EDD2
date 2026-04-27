@@ -163,60 +163,54 @@ def es_bipartito(grafo):
 
 
 # Función para calcular el peso del AEM () usando Prim
-def calcular_aem(grafo):
-    if not grafo:
-        return 0
-    
-    # Encontrar todas las componentes conexas
-    visitados_global = set()
-    pesos_componentes = []
-    
-    for nodo_inicio in grafo:
-        if nodo_inicio not in visitados_global:
-            # Calcular AEM de esta componente usando Prim
-            peso_componente = prim_aem(grafo, nodo_inicio, visitados_global)
-            pesos_componentes.append(peso_componente)
-    
-    return pesos_componentes
-
-
-# Función auxiliar Prim para calcular AEM de una componente
 def prim_aem(grafo, inicio, visitados_global):
     visitados = set()
     visitados.add(inicio)
     visitados_global.add(inicio)
     
-    # Encontrar todos los nodos en esta componente
     temp_visitados = set()
     componente_nodos = bfs_componente(grafo, inicio, temp_visitados)
     tamaño_componente = len(componente_nodos)
     
-    # Lista de aristas: (peso, nodo_origen, nodo_destino)
-    aristas = []
-    
-    # Agregar todas las aristas del nodo inicial
+    # heapq mantiene el orden automáticamente, sin .sort()
+    heap = []
     for vecino, peso in grafo[inicio]:
-        aristas.append((peso, inicio, vecino))
+        heapq.heappush(heap, (peso, inicio, vecino))
     
     peso_mst = 0
+    aristas_mst = []
     
-    # Procesar aristas hasta conectar todos los nodos de la componente
-    while aristas and len(visitados) < tamaño_componente:
-        # Ordenar aristas por peso y tomar la mínima
-        aristas.sort()
-        peso, origen, destino = aristas.pop(0)
+    while heap and len(visitados) < tamaño_componente:
+        peso, origen, destino = heapq.heappop(heap)  # saca el mínimo directo
         
         if destino not in visitados:
             visitados.add(destino)
             visitados_global.add(destino)
             peso_mst += peso
+            aristas_mst.append((origen, destino))
             
-            # Agregar nuevas aristas del nodo recién agregado
             for nuevo_vecino, nuevo_peso in grafo[destino]:
                 if nuevo_vecino not in visitados:
-                    aristas.append((nuevo_peso, destino, nuevo_vecino))
+                    heapq.heappush(heap, (nuevo_peso, destino, nuevo_vecino))
     
-    return peso_mst
+    return peso_mst, aristas_mst
+
+
+def calcular_aem(grafo):
+    if not grafo:
+        return [], []
+    
+    visitados_global = set()
+    pesos_componentes = []
+    aristas_componentes = []
+    
+    for nodo_inicio in grafo:
+        if nodo_inicio not in visitados_global:
+            peso, aristas = prim_aem(grafo, nodo_inicio, visitados_global)
+            pesos_componentes.append(peso)
+            aristas_componentes.append(aristas)
+    
+    return pesos_componentes, aristas_componentes
 
 def dijkstra(grafo, inicio):
     # Inicializamos distancias en infinito y predecesores en None
@@ -273,7 +267,7 @@ def dibujar_mapa(ruta, info_aeropuertos):
     lat_org = info_aeropuertos[origen]['latitude']
     lon_org = info_aeropuertos[origen]['longitude']
     
-    mapa = folium.Map(location=[lat_org, lon_org], zoom_start=3)
+    mapa = folium.Map(location=[lat_org, lon_org], zoom_start=3, tiles="CartoDB positron")
     
     # 2. Lista para guardar las coordenadas de la línea
     puntos_linea = []
@@ -299,6 +293,134 @@ def dibujar_mapa(ruta, info_aeropuertos):
     mapa.save(nombre_archivo)
     print(f"\n✓ Mapa generado: {nombre_archivo}")
     webbrowser.open(nombre_archivo)
+
+
+def dibujar_mst(aristas_componentes, info_aeropuertos):
+    """Dibuja todas las aristas del MST en un mapa folium."""
+    mapa = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
+    
+    colores = ["red", "blue", "green", "purple", "orange",
+               "darkred", "cadetblue", "darkgreen", "black", "gray"]
+    
+    for idx, aristas in enumerate(aristas_componentes):
+        color = colores[idx % len(colores)]
+        
+        for origen, destino in aristas:
+            if origen in info_aeropuertos and destino in info_aeropuertos:
+                lat1 = info_aeropuertos[origen]['latitude']
+                lon1 = info_aeropuertos[origen]['longitude']
+                lat2 = info_aeropuertos[destino]['latitude']
+                lon2 = info_aeropuertos[destino]['longitude']
+                
+                folium.PolyLine(
+                    [[lat1, lon1], [lat2, lon2]],
+                    color=color, weight=1, opacity=0.5
+                ).add_to(mapa)
+    
+    # Marcadores pequeños solo para nodos que aparecen en el MST
+    nodos_en_mst = set()
+    for aristas in aristas_componentes:
+        for origen, destino in aristas:
+            nodos_en_mst.add(origen)
+            nodos_en_mst.add(destino)
+    
+    for cod in nodos_en_mst:
+        if cod in info_aeropuertos:
+            info = info_aeropuertos[cod]
+            folium.CircleMarker(
+                location=[info['latitude'], info['longitude']],
+                radius=2,
+                color="red",
+                fill=True,
+                fill_opacity=0.7,
+                popup=f"{info['name']} ({cod})"
+            ).add_to(mapa)
+    
+    nombre_archivo = "mst_vuelos.html"
+    mapa.save(nombre_archivo)
+    print(f"✓ Mapa MST generado: {nombre_archivo}")
+    webbrowser.open(nombre_archivo)
+
+def dibujar_10_lejanos(origen, lejanos, info_aeropuertos):
+    info_org = info_aeropuertos[origen]
+    mapa = folium.Map(location=[info_org['latitude'], info_org['longitude']], 
+                      zoom_start=2, tiles="CartoDB positron")
+    
+    # Marcador especial para el origen
+    folium.Marker(
+        [info_org['latitude'], info_org['longitude']],
+        popup=f"ORIGEN: {info_org['name']}",
+        icon=folium.Icon(color='red', icon='star')
+    ).add_to(mapa)
+    
+    # Marcadores para los 10 lejanos y líneas de conexión
+    for cod_dest, dist in lejanos:
+        info_dest = info_aeropuertos[cod_dest]
+        loc_dest = [info_dest['latitude'], info_dest['longitude']]
+        
+        folium.Marker(
+            loc_dest,
+            popup=f"{info_dest['name']} ({cod_dest})\nDistancia: {dist:.2f} km",
+            icon=folium.Icon(color='blue', icon='info-sign')
+        ).add_to(mapa)
+        
+        # Línea punteada que muestra la distancia radial
+        folium.PolyLine(
+            [[info_org['latitude'], info_org['longitude']], loc_dest],
+            color="blue", weight=2, opacity=0.4, dash_array='5, 5'
+        ).add_to(mapa)
+        
+    nombre_archivo = f"lejanos_{origen}.html"
+    mapa.save(nombre_archivo)
+    webbrowser.open(nombre_archivo)
+
+def dibujar_caminos_lejanos(origen, lejanos, predecesores, info_aeropuertos):
+    """Dibuja en el mapa las rutas completas calculadas por Dijkstra."""
+    info_org = info_aeropuertos[origen]
+    mapa = folium.Map(location=[info_org['latitude'], info_org['longitude']], 
+                      zoom_start=2, tiles="CartoDB positron")
+    
+    # Lista de colores para que cada ruta sea distinguible
+    colores = ['red', 'blue', 'green', 'purple', 'orange', 'darkred', 'cadetblue', 'darkgreen', 'darkpurple', 'pink']
+    
+    # Dibujar el ORIGEN con un marcador especial
+    folium.Marker(
+        [info_org['latitude'], info_org['longitude']],
+        popup=f"ORIGEN: {info_org['name']} ({origen})",
+        icon=folium.Icon(color='black', icon='star')
+    ).add_to(mapa)
+
+    for i, (cod_dest, dist) in enumerate(lejanos):
+        # 1. Reconstruir el camino usando tu función existente
+        ruta = reconstruir_camino(predecesores, cod_dest)
+        
+        # 2. Convertir los códigos de aeropuerto en coordenadas [lat, lon]
+        puntos_camino = []
+        for nodo in ruta:
+            info = info_aeropuertos[nodo]
+            puntos_camino.append([info['latitude'], info['longitude']])
+        
+        color_ruta = colores[i % len(colores)]
+        
+        # 3. Dibujar la polilínea que sigue el camino real del grafo
+        folium.PolyLine(
+            puntos_camino,
+            color=color_ruta,
+            weight=3,
+            opacity=0.7,
+            popup=f"Ruta #{i+1} a {cod_dest} ({dist:.2f} km)"
+        ).add_to(mapa)
+        
+        # 4. Marcador en el destino final
+        folium.Marker(
+            puntos_camino[-1],
+            popup=f"Destino #{i+1}: {info_aeropuertos[cod_dest]['name']}\nDistancia: {dist:.2f} km",
+            icon=folium.Icon(color=color_ruta, icon='plane')
+        ).add_to(mapa)
+
+    nombre_mapa = f"rutas_lejanas_{origen}.html"
+    mapa.save(nombre_mapa)
+    webbrowser.open(nombre_mapa)
 
 # Menú principal
 def menu_principal():

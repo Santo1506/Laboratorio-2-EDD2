@@ -99,7 +99,7 @@ class AppGrafos(tk.Tk):
             ("1.  ¿Es conexo?",             self._accion_conexo),
             ("2.  ¿Es bipartito?",           self._accion_bipartito),
             ("3.  Peso del MST",             self._accion_mst),
-            ("4.  Aeropuertos más lejanos",  self._accion_mas_lejanos),
+            ("4.  Seleccionar Aeropuerto",  self._accion_mas_lejanos),
             ("5.  Ruta mínima en mapa",      self._accion_ruta_minima),
         ]
 
@@ -262,14 +262,102 @@ class AppGrafos(tk.Tk):
             
     def _accion_mst(self):
         self._separador()
-        self._escribir("▶ Calculando MST...\n", "titulo")
-        self._escribir("(próximamente)\n", "dim")
+        self._escribir("▶ Calculando árbol de expansión mínima...\n", "titulo")
+        self._escribir("  Esto puede tardar unos segundos ⏳\n", "dim")
 
+        def _tarea():
+            pesos, aristas_componentes = lg.calcular_aem(self.grafo)
+            self.after(0, lambda: self._mostrar_mst(pesos, aristas_componentes))
+
+        threading.Thread(target=_tarea, daemon=True).start()
+
+    def _mostrar_mst(self, pesos, aristas_componentes):
+        # Emparejamos peso con sus aristas y ordenamos de mayor a menor
+        componentes = sorted(zip(pesos, aristas_componentes),
+                            key=lambda x: x[0], reverse=True)
+
+        total = sum(pesos)
+        num = len(pesos)
+
+        self._escribir(f"  Componentes encontradas: {num}\n", "normal")
+        self._escribir(f"  Peso total (suma de todos los MST): {total:,.2f} km\n\n", "ok")
+
+        self._escribir("  Detalle por componente:\n", "titulo")
+        self._escribir(f"  {'#':<4} {'Aristas MST':<14} {'Peso (km)'}\n", "dim")
+        self._escribir("  " + "─" * 38 + "\n", "dim")
+
+        for i, (peso, aristas) in enumerate(componentes, 1):
+            self._escribir(
+                f"  {i:<4} {len(aristas):<14} {peso:>14,.2f} km\n", "normal"
+            )
+
+        self._escribir("\n  Abriendo mapa del MST en el navegador...\n", "dim")
+
+        aristas_ordenadas = [a for _, a in componentes]
+
+        def _abrir_mapa():
+            lg.dibujar_mst(aristas_ordenadas, self.info_aeropuertos)
+
+        threading.Thread(target=_abrir_mapa, daemon=True).start()
+
+# En Gui.py
     def _accion_mas_lejanos(self):
+        from tkinter import simpledialog
         self._separador()
-        self._escribir("▶ Aeropuertos más lejanos...\n", "titulo")
-        self._escribir("(próximamente)\n", "dim")
+        self._escribir("▶ Consultar aeropuerto y 10 más lejanos\n", "titulo")
+        
+        # 1. Solicitar el código del nodo (aeropuerto)
+        codigo = simpledialog.askstring("Seleccionar Nodo", "Ingresa el código IATA (ej: BOG):", parent=self)
+        
+        if not codigo:
+            self._escribir("  Operación cancelada.\n", "dim")
+            return
+            
+        codigo = codigo.strip().upper()
+        
+        # 2. Validar si existe en el grafo
+        if codigo not in self.grafo:
+            self._escribir(f"  ✗ El aeropuerto '{codigo}' no existe en el sistema.\n", "error")
+            return
 
+        # 3. Cálculo en segundo plano para no congelar la GUI
+        def _tarea():
+            try:
+                # Calcular distancias desde el origen usando Dijkstra
+                distancias, predecesores = lg.dijkstra(self.grafo, codigo)
+                # Obtener el top 10 de los más lejanos
+                lejanos = lg.Diez_aeropuertos_mas_lejanos(self.grafo, distancias, self.info_aeropuertos)
+                
+                # Mostrar información del nodo y lista en la interfaz
+                self.after(0, lambda: self._mostrar_resultados_lejanos(codigo, lejanos))
+                
+                # Generar y abrir el mapa
+                lg.dibujar_caminos_lejanos(codigo, lejanos, predecesores, self.info_aeropuertos)
+                
+            except Exception as e:
+                self.after(0, lambda: self._escribir(f" Error: {str(e)}\n", "error"))
+
+        threading.Thread(target=_tarea, daemon=True).start()
+
+    def _mostrar_resultados_lejanos(self, origen, lejanos):
+        info_o = self.info_aeropuertos[origen]
+        
+        # Mostrar la info del aeropuerto consultado
+        self._escribir(f"\n  [INFO NODO SELECCIONADO]\n", "ok")
+        self._escribir(f"  Código: {origen}\n", "normal")
+        self._escribir(f"  Aeropuerto: {info_o['name']}\n", "normal")
+        self._escribir(f"  Ubicación: {info_o['city']}, {info_o['country']}\n\n", "normal")
+        
+        # Mostrar la tabla de resultados
+        self._escribir("  LOS 10 MÁS LEJANOS (Camino Mínimo):\n", "titulo")
+        self._escribir(f"  {'#':<4} {'Cód':<5} {'Ciudad':<20} {'Distancia'}\n", "dim")
+        self._escribir("  " + "─" * 45 + "\n", "dim")
+        
+        for i, (cod_dest, dist) in enumerate(lejanos, 1):
+            info_d = self.info_aeropuertos[cod_dest]
+            self._escribir(f"  {i:<4} {cod_dest:<5} {info_d['city'][:18]:<20} {dist:>10,.2f} km\n", "normal")
+        
+        self._escribir("\n✓ Mapa generado y abierto en el navegador.\n", "ok")
     def _accion_ruta_minima(self):
         self._separador()
         self._escribir("▶ Calculando ruta mínima...\n", "titulo")
