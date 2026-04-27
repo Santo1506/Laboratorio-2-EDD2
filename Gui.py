@@ -347,6 +347,8 @@ class AppGrafos(tk.Tk):
         self._escribir(f"  Código: {origen}\n", "normal")
         self._escribir(f"  Aeropuerto: {info_o['name']}\n", "normal")
         self._escribir(f"  Ubicación: {info_o['city']}, {info_o['country']}\n\n", "normal")
+        self._escribir(f"  Latitud:    {info_o['latitude']}\n", "normal")
+        self._escribir(f"  Longitud:   {info_o['longitude']}\n\n", "normal")
         
         # Mostrar la tabla de resultados
         self._escribir("  LOS 10 MÁS LEJANOS (Camino Mínimo):\n", "titulo")
