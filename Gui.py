@@ -361,9 +361,100 @@ class AppGrafos(tk.Tk):
         
         self._escribir("\n✓ Mapa generado y abierto en el navegador.\n", "ok")
     def _accion_ruta_minima(self):
+        from tkinter import simpledialog
         self._separador()
-        self._escribir("▶ Calculando ruta mínima...\n", "titulo")
-        self._escribir("(próximamente)\n", "dim")
+        self._escribir("▶ Ruta mínima entre dos aeropuertos\n", "titulo")
+        
+        # 1. Solicitar el código del aeropuerto de origen
+        origen = simpledialog.askstring("Aeropuerto Origen", "Ingresa el código IATA del origen (ej: BOG):", parent=self)
+        
+        if not origen:
+            self._escribir("  Operación cancelada.\n", "dim")
+            return
+        
+        origen = origen.strip().upper()
+        
+        # 2. Validar si existe en el grafo
+        if origen not in self.grafo:
+            self._escribir(f"  ✗ El aeropuerto '{origen}' no existe en el sistema.\n", "error")
+            return
+        
+        # 3. Solicitar el código del aeropuerto de destino
+        destino = simpledialog.askstring("Aeropuerto Destino", "Ingresa el código IATA del destino (ej: MIA):", parent=self)
+        
+        if not destino:
+            self._escribir("  Operación cancelada.\n", "dim")
+            return
+        
+        destino = destino.strip().upper()
+        
+        # 4. Validar si existe en el grafo
+        if destino not in self.grafo:
+            self._escribir(f"  ✗ El aeropuerto '{destino}' no existe en el sistema.\n", "error")
+            return
+        
+        # 5. Cálculo en segundo plano
+        def _tarea():
+            try:
+                # Calcular distancias desde el origen usando Dijkstra
+                distancias, predecesores = lg.dijkstra(self.grafo, origen)
+                
+                # Verificar si existe ruta
+                if distancias[destino] == float('inf'):
+                    self.after(0, lambda: self._escribir(
+                        f"  ✗ No existe ruta entre {origen} y {destino}.\n", "error"
+                    ))
+                    return
+                
+                # Reconstruir el camino
+                camino = lg.reconstruir_camino(predecesores, destino)
+                
+                # Mostrar resultados en la interfaz
+                self.after(0, lambda: self._mostrar_ruta_minima(origen, destino, camino, distancias[destino]))
+                
+                # Generar y abrir el mapa
+                lg.dibujar_ruta_minima(camino, self.info_aeropuertos)
+                
+            except Exception as e:
+                self.after(0, lambda: self._escribir(f"  ✗ Error: {str(e)}\n", "error"))
+        
+        threading.Thread(target=_tarea, daemon=True).start()
+    
+    def _mostrar_ruta_minima(self, origen, destino, camino, distancia_total):
+        """Muestra información del camino mínimo encontrado."""
+        self._escribir(f"\n  [RUTA MÍNIMA ENCONTRADA]\n", "ok")
+        self._escribir(f"  Origen:  {origen}\n", "normal")
+        self._escribir(f"  Destino: {destino}\n", "normal")
+        self._escribir(f"  Distancia total: {distancia_total:,.2f} km\n", "ok")
+        self._escribir(f"  Número de escalas: {len(camino) - 1}\n\n", "normal")
+        
+        # Mostrar cada vértice del camino con su información
+        self._escribir("  [AEROPUERTOS EN LA RUTA]\n", "titulo")
+        self._escribir(f"  {'#':<4} {'Código':<6} {'Aeropuerto':<30} {'Ciudad':<20}\n", "dim")
+        self._escribir("  " + "─" * 65 + "\n", "dim")
+        
+        for idx, codigo in enumerate(camino, 1):
+            info = self.info_aeropuertos[codigo]
+            aero_name = info['name'][:28]
+            ciudad = info['city'][:18]
+            self._escribir(
+                f"  {idx:<4} {codigo:<6} {aero_name:<30} {ciudad:<20}\n",
+                "normal"
+            )
+        
+        # Mostrar detalles de cada vértice intermedio
+        if len(camino) > 2:
+            self._escribir("\n  [DETALLES DE VÉRTICES INTERMEDIOS]\n", "titulo")
+            for idx, codigo in enumerate(camino[1:-1], 1):
+                info = self.info_aeropuertos[codigo]
+                self._escribir(f"\n  Escala {idx}: {codigo}\n", "ok")
+                self._escribir(f"    Nombre:    {info['name']}\n", "normal")
+                self._escribir(f"    Ciudad:    {info['city']}\n", "normal")
+                self._escribir(f"    País:      {info['country']}\n", "normal")
+                self._escribir(f"    Latitud:   {info['latitude']}\n", "normal")
+                self._escribir(f"    Longitud:  {info['longitude']}\n", "normal")
+        
+        self._escribir("\n✓ Mapa generado y abierto en el navegador.\n", "ok")
 
 
 # ──────────────────────────────────────────────

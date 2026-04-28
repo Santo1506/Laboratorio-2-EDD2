@@ -422,6 +422,73 @@ def dibujar_caminos_lejanos(origen, lejanos, predecesores, info_aeropuertos):
     mapa.save(nombre_mapa)
     webbrowser.open(nombre_mapa)
 
+def dibujar_ruta_minima(camino, info_aeropuertos):
+    """Dibuja en el mapa la ruta mínima entre dos aeropuertos."""
+    if not camino or len(camino) < 2:
+        print("✗ Camino inválido")
+        return
+    
+    # Crear mapa centrado en el primer punto
+    primer_aero = info_aeropuertos[camino[0]]
+    mapa = folium.Map(
+        location=[primer_aero['latitude'], primer_aero['longitude']], 
+        zoom_start=3, 
+        tiles="CartoDB positron"
+    )
+    
+    # Convertir los códigos a coordenadas
+    puntos_camino = []
+    for codigo in camino:
+        info = info_aeropuertos[codigo]
+        puntos_camino.append([info['latitude'], info['longitude']])
+    
+    # Dibujar la polilínea del camino
+    folium.PolyLine(
+        puntos_camino,
+        color="red",
+        weight=4,
+        opacity=0.8
+    ).add_to(mapa)
+    
+    # Agregar marcadores para cada aeropuerto en la ruta
+    for idx, codigo in enumerate(camino):
+        info = info_aeropuertos[codigo]
+        
+        if idx == 0:
+            # Marcador especial para el origen
+            folium.Marker(
+                location=[info['latitude'], info['longitude']],
+                popup=f"<b>ORIGEN</b><br>{info['name']}<br>({codigo})<br>{info['city']}, {info['country']}",
+                tooltip=codigo,
+                icon=folium.Icon(color='green', icon='plane', prefix='fa')
+            ).add_to(mapa)
+        elif idx == len(camino) - 1:
+            # Marcador especial para el destino
+            folium.Marker(
+                location=[info['latitude'], info['longitude']],
+                popup=f"<b>DESTINO</b><br>{info['name']}<br>({codigo})<br>{info['city']}, {info['country']}",
+                tooltip=codigo,
+                icon=folium.Icon(color='red', icon='plane', prefix='fa')
+            ).add_to(mapa)
+        else:
+            # Marcadores para escalas intermedias
+            folium.Marker(
+                location=[info['latitude'], info['longitude']],
+                popup=f"<b>ESCALA {idx}</b><br>{info['name']}<br>({codigo})<br>{info['city']}, {info['country']}<br><b>Latitud:</b> {info['latitude']}<br><b>Longitud:</b> {info['longitude']}",
+                tooltip=f"Escala {idx}: {codigo}",
+                icon=folium.Icon(color='blue', icon='info-sign', prefix='fa')
+            ).add_to(mapa)
+    
+    # Generar nombre del archivo
+    origen = camino[0]
+    destino = camino[-1]
+    nombre_archivo = f"ruta_minima_{origen}_a_{destino}.html"
+    
+    # Guardar y abrir el mapa
+    mapa.save(nombre_archivo)
+    print(f"✓ Mapa de ruta mínima generado: {nombre_archivo}")
+    webbrowser.open(nombre_archivo)
+
 # Menú principal
 def menu_principal():
     # Cargar grafo desde CSV
