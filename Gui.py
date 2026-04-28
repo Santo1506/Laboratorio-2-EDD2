@@ -96,11 +96,12 @@ class AppGrafos(tk.Tk):
 
         # Definición de cada botón: (etiqueta, comando)
         botones = [
-            ("1.  ¿Es conexo?",             self._accion_conexo),
-            ("2.  ¿Es bipartito?",           self._accion_bipartito),
-            ("3.  Peso del MST",             self._accion_mst),
-            ("4.  Seleccionar Aeropuerto",  self._accion_mas_lejanos),
-            ("5.  Ruta mínima en mapa",      self._accion_ruta_minima),
+            ("1.  Mapa de aeropuertos",      self._accion_mapa_aeropuertos),
+            ("2.  ¿Es conexo?",             self._accion_conexo),
+            ("3.  ¿Es bipartito?",          self._accion_bipartito),
+            ("4.  Peso del MST",            self._accion_mst),
+            ("5.  Seleccionar Aeropuerto",  self._accion_mas_lejanos),
+            ("6.  Ruta mínima en mapa",     self._accion_ruta_minima),           
         ]
 
         self.btns = []
@@ -212,8 +213,26 @@ class AppGrafos(tk.Tk):
         self._escribir("─" * 60 + "\n", "dim")
 
     # ──────────────────────────────────────────
-    #  ACCIONES (por ahora son stubs)
+    #  ACCIONES DE LOS BOTONES
     # ──────────────────────────────────────────
+
+    def _accion_mapa_aeropuertos(self):
+        self._separador()
+        self._escribir("▶ Generando mapa con todos los aeropuertos...\n", "titulo")
+        self._escribir("  Abriendo mapa en el navegador...\n", "dim")
+
+        def _tarea():
+            try:
+                lg.dibujar_aeropuertos(self.info_aeropuertos)
+                self.after(0, lambda: self._escribir(
+                    "✓ Mapa de todos los aeropuertos generado correctamente.\n", "ok"
+                ))
+            except Exception as e:
+                self.after(0, lambda: self._escribir(
+                    f"✗ Error al generar el mapa: {str(e)}\n", "error"
+                ))
+
+        threading.Thread(target=_tarea, daemon=True).start()
 
     def _accion_conexo(self):
         self._separador()
@@ -352,12 +371,12 @@ class AppGrafos(tk.Tk):
         
         # Mostrar la tabla de resultados
         self._escribir("  LOS 10 MÁS LEJANOS (Camino Mínimo):\n", "titulo")
-        self._escribir(f"  {'#':<4} {'Cód':<5} {'Ciudad':<20} {'Distancia'}\n", "dim")
+        self._escribir(f"  {'#':<4} {'Cód':<5}{'Nombre':<30} {'Ciudad':<20} {'Pais':<18}{'lat':<12}{'lon':<12}{'Distancia':<12}\n", "dim")
         self._escribir("  " + "─" * 45 + "\n", "dim")
         
         for i, (cod_dest, dist) in enumerate(lejanos, 1):
             info_d = self.info_aeropuertos[cod_dest]
-            self._escribir(f"  {i:<4} {cod_dest:<5} {info_d['city'][:18]:<20} {dist:>10,.2f} km\n", "normal")
+            self._escribir(f"  {i:<4} {cod_dest:<5} {info_d['name'][:28]:<30} {info_d['city'][:18]:<20} {info_d['country'][:16]:<18} {info_d['latitude']:<12} {info_d['longitude']:<12} {dist:>10,.2f} km\n", "normal")
         
         self._escribir("\n✓ Mapa generado y abierto en el navegador.\n", "ok")
     def _accion_ruta_minima(self):
@@ -455,6 +474,7 @@ class AppGrafos(tk.Tk):
                 self._escribir(f"    Longitud:  {info['longitude']}\n", "normal")
         
         self._escribir("\n✓ Mapa generado y abierto en el navegador.\n", "ok")
+    
 
 
 # ──────────────────────────────────────────────

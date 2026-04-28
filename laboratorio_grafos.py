@@ -32,6 +32,8 @@ def construir_grafo_desde_csv(ruta_csv):
             distancia = calcular_distancia(lat_origen, lon_origen, lat_destino, lon_destino)
             
             # Agregar al grafo (no dirigido)
+            if origen == destino:
+                continue
             if origen not in grafo:
                 grafo[origen] = []
                 info_aeropuertos[origen] = {
@@ -487,6 +489,26 @@ def dibujar_ruta_minima(camino, info_aeropuertos):
     # Guardar y abrir el mapa
     mapa.save(nombre_archivo)
     print(f"✓ Mapa de ruta mínima generado: {nombre_archivo}")
+    webbrowser.open(nombre_archivo)
+
+def dibujar_aeropuertos(info_aeropuertos):
+    mapa = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
+
+    for codigo, info in info_aeropuertos.items():
+        folium.CircleMarker(
+            location=[info["latitude"], info["longitude"]],
+            radius=2,
+            popup=(
+                f"{info['name']} ({codigo})<br>"
+                f"{info['city']}, {info['country']}<br>"
+                f"Lat: {info['latitude']}<br>"
+                f"Lon: {info['longitude']}"
+            ),
+            fill=True
+        ).add_to(mapa)
+
+    nombre_archivo = "aeropuertos_mapa.html"
+    mapa.save(nombre_archivo)
     webbrowser.open(nombre_archivo)
 
 # Menú principal
